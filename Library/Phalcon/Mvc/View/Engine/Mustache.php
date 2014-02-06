@@ -26,6 +26,12 @@ class Mustache extends Engine implements EngineInterface
     {
         $this->mustache = new \Mustache_Engine();
 
+        $partialsDir = $view->getPartialsDir();
+        if ($partialsDir != '') {
+            $this->mustache->setPartialsLoader(
+                new \Mustache_Loader_FilesystemLoader($partialsDir));
+        }
+
         parent::__construct($view, $dependencyInjector);
     }
 
